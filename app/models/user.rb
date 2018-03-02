@@ -4,6 +4,7 @@ class User < ApplicationRecord
     create! do |user|
       user.provider = auth['provider']
       user.uid = auth['uid']
+      user.email = auth['info']['email']
       if auth['info']
          user.name = auth['info']['name'] || ""
       end

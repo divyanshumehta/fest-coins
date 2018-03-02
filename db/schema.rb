@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627005245) do
+ActiveRecord::Schema.define(version: 20180302045456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 20140627005245) do
     t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
+    t.string   "promo_code"
+    t.string   "reffered_promo_code"
+    t.integer  "coins"
   end
 
 end
