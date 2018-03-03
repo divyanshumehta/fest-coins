@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to '/auth/facebook'
+    if params[:q] == 'fb'
+      redirect_to '/auth/facebook'
+    else
+      redirect_to '/auth/google'
+    end
   end
 
   def create
