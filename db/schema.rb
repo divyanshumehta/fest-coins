@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302045456) do
+ActiveRecord::Schema.define(version: 20180303060747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "transcations", force: :cascade do |t|
+    t.integer  "amount"
+    t.string   "receiver"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_transcations_on_user_id", unique: true, using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -27,4 +36,5 @@ ActiveRecord::Schema.define(version: 20180302045456) do
     t.integer  "coins"
   end
 
+  add_foreign_key "transcations", "users"
 end
