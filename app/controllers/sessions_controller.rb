@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     if params[:q] == 'fb'
       redirect_to '/auth/facebook'
     else
-      redirect_to '/auth/google'
+      redirect_to '/auth/google_oauth2'
     end
   end
 

@@ -133,6 +133,10 @@ GEM
       rack (>= 1.0, < 3)
     omniauth-facebook (4.0.0)
       omniauth-oauth2 (~> 1.2)
+    omniauth-google-oauth2 (0.5.3)
+      jwt (>= 1.5)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.5)
     omniauth-oauth (1.1.0)
       oauth
       omniauth (~> 1.0)
@@ -260,6 +264,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   omniauth
   omniauth-facebook
+  omniauth-google-oauth2
   omniauth-twitter
   pg (~> 0.21.0)
   puma (~> 3.10)
