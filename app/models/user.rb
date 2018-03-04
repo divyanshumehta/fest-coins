@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :transcations
+  before_create :initial_coins
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -10,6 +11,10 @@ class User < ApplicationRecord
          user.email = auth['info']['email']
       end
     end
+  end
+
+  def initial_coins
+    self.coins = 50
   end
 
 end
