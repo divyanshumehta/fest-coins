@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  mount RailsAdmin::Engine => '/dm', as: 'rails_admin'
   resources :users, except: [:index]
   root to: 'visitors#index'
   get '/auth/:provider/callback' => 'sessions#create'

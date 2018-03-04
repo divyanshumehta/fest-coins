@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'binding_of_caller'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'rails_admin', '~> 1.3'
 group :development, :test do
   gem 'byebug', platform: :mri
 end
