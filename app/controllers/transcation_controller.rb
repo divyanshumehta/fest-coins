@@ -25,6 +25,8 @@ class TranscationController < ApplicationController
     src.coins -= amount
     dest.coins += amount
     t.save
+    src.save
+    dest.save
     flash[:success] = amount.to_s + " Aavishkar Coins transfered to " + dest.name
     redirect_to root_path
   end
