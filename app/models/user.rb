@@ -8,7 +8,8 @@ class User < ApplicationRecord
       user.uid = auth['uid']
       if auth['info']
          user.name = auth['info']['name'] || ""
-         user.email = auth['info']['email']
+         user.email = auth['info']['email'] || ""
+         user.image = auth['info']['image'] || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQm1ImiHojbK65t0NgsFVP9Mv0Mct895OefF06vvzM06GIx8u4SA"
       end
     end
   end

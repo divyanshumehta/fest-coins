@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305164118) do
+ActiveRecord::Schema.define(version: 20180305184246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180305164118) do
     t.string   "reffered_promo_code"
     t.integer  "coins"
     t.boolean  "admin"
+    t.string   "image"
   end
 
   add_foreign_key "transcations", "users"
