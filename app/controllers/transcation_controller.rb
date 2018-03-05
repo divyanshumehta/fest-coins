@@ -14,7 +14,17 @@ class TranscationController < ApplicationController
       redirect_to root_path
       return
     end
+    if amount <= 0
+      flash[:danger] = "Enter valid transfer amount"
+      redirect_to root_path
+      return
+    end
     src = current_user
+    if src == dest
+      flash[:danger] = "Sorry can't transfer money to yourself"
+      redirect_to root_path
+      return
+    end
     puts amount
     puts src
     puts dest
@@ -23,11 +33,11 @@ class TranscationController < ApplicationController
     t.receiver = dest.email
     t.amount = amount
     src.coins -= amount
-    dest.coins += amount
-    t.save
     src.save
+    dest.coins += amount
     dest.save
-    flash[:success] = amount.to_s + " Aavishkar Coins transfered to " + dest.name
+    t.save
+    flash[:notice] = amount.to_s + " Aavishkar Coins transfered to " + dest.name
     redirect_to root_path
   end
 end
