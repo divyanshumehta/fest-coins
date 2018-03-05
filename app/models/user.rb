@@ -15,6 +15,11 @@ class User < ApplicationRecord
 
   def initial_coins
     self.coins = 50
+    t=Transcation.new
+    t.receiver = self.email
+    t.amount = 50
+    t.user_id = User.first.id
+    t.save
   end
 
 end

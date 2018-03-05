@@ -1,3 +1,13 @@
+<style>
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 250px;
+    overflow-y: auto;
+}
+</style>
+
 <h1>Welcome <%= current_user.name %></h1>
 Current Balance : <%= current_user.coins %></br>
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tansfer Coins</button>
@@ -25,6 +35,48 @@ Current Balance : <%= current_user.coins %></br>
 
           <button type="submit" class="btn btn-primary">Submit</button>
   	    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Transcation History -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Tanscation histroy</button>
+
+<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Transfer Coins</h4>
+      </div>
+      <div class="modal-body">
+        Current Balance: <%= current_user.coins %></br>
+        <table class="table">
+          <tr>
+            <th>Timestamp</th>
+            <th>Beneficiary</th>
+            <th>Amount</th>
+          </tr>
+          <% @transcations.each do |transcation| %>
+            <% if transcation[:in_out] == "in" %>
+              <tr style="color: #558B2F;">
+            <% else %>
+              <tr style="color: #B71C1C;">
+            <% end %>
+              <td><%=transcation[:time_stamp]%></td>
+              <td><%=transcation[:beneficiary]%></td>
+              <td><%=transcation[:amount]%></td>
+            </tr>
+          <% end %>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
