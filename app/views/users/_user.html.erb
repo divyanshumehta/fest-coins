@@ -14,7 +14,7 @@ input {
 
 <h3><img src="<%= current_user.image %>" style="display:inline;max-width:50px;max-height:50px;"> <%= current_user.name %></h3>
 Current Balance : <%= current_user.coins %></br>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tansfer Coins</button>
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Tansfer Coins</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -53,7 +53,7 @@ Current Balance : <%= current_user.coins %></br>
 </div>
 
 <!-- Transcation History -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Tansaction histroy</button>
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2">Transaction histroy</button>
 
 <!-- Modal -->
 <div id="myModal2" class="modal fade" role="dialog">
@@ -96,7 +96,7 @@ Current Balance : <%= current_user.coins %></br>
 
 <!-- Refferal Code -->
 <% if current_user.reffered_promo_code.nil? %>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal3">Got a Refferal Code?</button>
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal3">Been reffered by a friend?</button>
 
 <!-- Modal -->
 <div id="myModal3" class="modal fade" role="dialog">
@@ -106,7 +106,7 @@ Current Balance : <%= current_user.coins %></br>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Transfer Coins</h4>
+        <h4 class="modal-title">Refferal Code</h4>
       </div>
       <div class="modal-body">
         <form action="/refferal" method="post">
@@ -123,3 +123,19 @@ Current Balance : <%= current_user.coins %></br>
   </div>
 </div>
 <% end %>
+<br/>
+<br/>
+<div id="shareBtn" class="btn btn-success clearfix">Share my Refferal Code</div>
+
+<script>
+document.getElementById('shareBtn').onclick = function() {
+  var refferal_code = "<%= current_user.promo_code %>";
+  FB.ui({
+    method: 'share',
+    display: 'popup',
+    mobile_iframe: true,
+    quote: 'Login and Earn with my Refferal Code: '+ refferal_code,
+    href: 'http://eurekoin.herokuapp.com',
+  }, function(response){});
+}
+</script>
