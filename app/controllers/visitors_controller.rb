@@ -13,7 +13,7 @@ class VisitorsController < ApplicationController
         src = income.user.name
         @transcations<<{beneficiary: src, amount:income.amount, in_out:"in", time_stamp:income.created_at}
       end
-      @transcations.sort_by { |hsh| hsh[:time_stamp] }
+      @transcations = @transcations.sort_by { |hsh| hsh[:time_stamp] }.reverse
     end
   end
 
