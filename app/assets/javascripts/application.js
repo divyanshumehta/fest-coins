@@ -43,7 +43,7 @@ function render_user(user,index) {
             <label for="'+index+'">\
               <img src="'+user.image+'"> '+user.name+'\
             </label><input class="alternative" type="radio" id="'+index+'">\
-          </div><br/>'
+          </div>'
 }
 
 
@@ -78,9 +78,10 @@ $(document).ready(function(){
   $(document).on('click','.alternative',function(e){
     $('#dest_email').val(data[this.id].email);
     $('.image_grid').css("color","black");
-    $('.image_grid').addClass('hidden');
-    $('#image_grid'+this.id).removeClass('hidden');
+    $('.image_grid').css('display','none');
+    $('#image_grid'+this.id).css('display','block');
     $('#image_grid'+this.id).css("color","green");
+    $('#dest_name').val(data[this.id].name);
   });
 
 });

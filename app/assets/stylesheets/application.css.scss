@@ -14,10 +14,10 @@
  *= require_self
  */
  img {
-     border-radius: 50%;
-     display:inline;
+     border-radius: 50%!important;
      max-width:50px;
      max-height:50px;
+     border: solid 2px white !important;
  }
 .image_grid label {
   cursor: pointer;

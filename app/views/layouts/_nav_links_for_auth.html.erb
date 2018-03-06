@@ -1,4 +1,5 @@
 <% if user_signed_in? %>
-  <li><%= link_to 'Sign out', signout_path %></li>
-<% else %>
+  <li class="nav-item">
+    <a class="nav-link" style="color: white" href="/signout">Sign Out</a>
+  </li>
 <% end %>
