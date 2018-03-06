@@ -15,3 +15,51 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+var data = {};
+
+function render_user(user,index) {
+  return '<div class="image_grid" id="image_grid'+index+'">\
+            <label for="'+index+'">\
+              <img src="'+user.image+'"> '+user.name+'\
+            </label><input class="alternative" type="radio" id="'+index+'">\
+          </div><br/>'
+}
+
+
+
+function search_user(){
+  name = $('#dest_name').val();
+  $.ajax({
+				type: "GET",
+				url: "/search/user",
+				data: {"name": name},
+				success: function(result){
+          console.log(result);
+					if(result.status==='OK'){
+            data = result.data;
+            $('#dest_info_display').html('<b>Search Results</b><br/>Selcet the user to transfer amount to<br/>');
+              $.each(result.data,function(index,user){
+                $('#dest_info_display').append(render_user(user,index));
+              });
+					}
+					else if (result.status == "limit") {
+            $('#dest_info_display').html('<b>Search Results</b><br/>Please be more specific<br/>');
+          }
+          else {
+            $('#dest_info_display').html('<b>Search Results</b><br/>No such user search again');
+          }
+				},
+			});
+};
+
+$(document).ready(function(){
+
+  $(document).on('click','.alternative',function(e){
+    $('#dest_email').val(data[this.id].email);
+    $('.image_grid').css("color","black");
+    $('.image_grid').addClass('hidden');
+    $('#image_grid'+this.id).removeClass('hidden');
+    $('#image_grid'+this.id).css("color","green");
+  });
+
+});

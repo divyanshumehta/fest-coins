@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get '/signout' => 'sessions#destroy', :as => :signout
   post '/transfer' => 'transcation#transfer'
   get '/auth/failure' => 'sessions#failure'
+  get '/search/user' => 'users#search'
 end

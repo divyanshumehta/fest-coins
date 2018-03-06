@@ -6,9 +6,13 @@
     height: 250px;
     overflow-y: auto;
 }
+
+input {
+  max-width: 70%;
+}
 </style>
 
-<h3><img src="<%= current_user.image %>" style="display:inline;"> <%= current_user.name %></h3>
+<h3><img src="<%= current_user.image %>" style="display:inline;max-width:50px;max-height:50px;"> <%= current_user.name %></h3>
 Current Balance : <%= current_user.coins %></br>
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tansfer Coins</button>
 
@@ -26,18 +30,22 @@ Current Balance : <%= current_user.coins %></br>
         <form action="/transfer" method="post">
   	      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-          <label for="dest">Send to</label>
-          <input type="email" id="dest" name="email" class="form-control" placeholder="Enter email">
+          <div id="amount_div">
+            <label for="amount">Amount</label>
+            <input id="amount" name="amount" class="form-control" placeholder="0">
+          </div>
+          <label for="dest_name">Search</label>
+          <input id="dest_name" onkeyup="search_user()" class="form-control" placeholder="Enter Name"><br/>
+          <div id="dest_info_display"><b>Search Results</b><br/>
+          </div>
 
-          <label for="amount">Amount</label>
-          <input id="amount" name="amount" class="form-control" placeholder="0">
-          <br/>
+          <input type="hidden" id="dest_email" name="email" class="form-control" placeholder="Enter email">
 
-          <button type="submit" class="btn btn-primary">Submit</button>
-  	    </form>
-      </div>
+          </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 
