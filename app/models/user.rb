@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :transcations
-  before_create :initial_coins
+  before_create :initial_coins_promo_code
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -14,13 +14,18 @@ class User < ApplicationRecord
     end
   end
 
-  def initial_coins
+  def initial_coins_promo_code
     self.coins = 50
     t=Transcation.new
     t.receiver = self.email
     t.amount = 50
     t.user_id = User.first.id
     t.save
+    self.promo_code = "AVSKR"
+    self.name.split(" ").each do |word|
+      self.promo_code += word[0]
+    end
+    self.promo_code += (User.last.id+54).to_s
   end
 
 end
