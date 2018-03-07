@@ -23,7 +23,7 @@ class User < ApplicationRecord
     t.save
     self.promo_code = "AVSKR"
     self.name.split(" ").each do |word|
-      self.promo_code += word[0]
+      self.promo_code += word[0].upcase
     end
     self.promo_code += (User.last.id+54).to_s
   end

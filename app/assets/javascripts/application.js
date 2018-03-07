@@ -84,4 +84,8 @@ $(document).ready(function(){
     $('#dest_name').val(data[this.id].name);
   });
 
+  setTimeout(function() {
+    $('#messages').fadeOut('slow');
+}, 3000);
+
 });
