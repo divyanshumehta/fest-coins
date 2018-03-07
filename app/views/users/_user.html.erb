@@ -1,6 +1,7 @@
 <style>
-.container-fluid{
-  margin-top: 1em;
+.pg-wrap{
+  margin-top: 5em;
+  margin-bottom: 10em;
 }
 .content-wrap{
   margin: 1em auto;
@@ -16,96 +17,101 @@
     margin-left: 0.5%;
     margin-right: 0.5%;
   }
+  .content-wrap{
+    width: 100%;
+  }
 }
 </style>
-
-<div class="container-fluid" align="center">
-  <div class="card" style="padding:1%;max-width: 400px;background-color: #00838f">
-    <h3 style="color: #ffffff"><img style="margin: 3%;" src="<%= current_user.image %>">
-      <br><%= current_user.name %>
-    </h3>
-    <span style="color: #ffffff" >Current Balance : <%= current_user.coins %></br></span>
+<div class="pg-wrap">
+  <div class="container-fluid" align="center">
+    <div class="card" style="padding:1%;max-width: 400px;background-color: #00838f">
+      <h3 style="color: #ffffff"><img style="margin: 3%;" src="<%= current_user.image %>">
+        <br><%= current_user.name %>
+      </h3>
+      <span style="color: #ffffff" >Current Balance : <%= current_user.coins %>
+      <img src="<%= asset_path('logo.png') %>" style="max-width:20px;max-height:20px;"></br></span>
+    </div>
   </div>
-</div>
 
 
-<div class="content-wrap container-fluid">
-  <ul class="nav nav-tabs nav-justified" style="background-color: #00838f">
-      <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">Transfer</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#panel2" role="tab">History</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#panel3" role="tab">Refferal</a>
-      </li>
-  </ul>
-  <div class="tab-content card">
-      <div class="tab-pane fade in show active"  id="panel1" role="tabpanel">
-        <div class="tab-inside">
-          <form action="/transfer" method="post">
-            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <div class="content-wrap container-fluid">
+    <ul class="nav nav-tabs nav-justified" style="background-color: #00838f">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">Transfer</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel2" role="tab">History</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel3" role="tab">Refferal</a>
+        </li>
+    </ul>
+    <div class="tab-content card">
+        <div class="tab-pane fade in show active"  id="panel1" role="tabpanel">
+          <div class="tab-inside">
+            <form action="/transfer" method="post">
+              <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-            <div id="amount_div">
-              <label for="amount" >Amount</label>
-              <input id="amount" name="amount" class="form-control" placeholder="0">
-            </div>
-            <label for="dest_name">Search</label>
-            <input id="dest_name" onkeyup="search_user()" class="form-control" placeholder="Enter Name"><br/>
-            <div id="dest_info_display"><b>Search Results</b><br/>
-            </div>
+              <div id="amount_div">
+                <label for="amount" >Amount</label>
+                <input id="amount" name="amount" class="form-control" placeholder="0">
+              </div>
+              <label for="dest_name">Search</label>
+              <input id="dest_name" onkeyup="search_user()" class="form-control" placeholder="Enter Name"><br/>
+              <div id="dest_info_display"><b>Search Results</b><br/>
+              </div>
 
-            <input type="hidden" id="dest_email" name="email" class="form-control" placeholder="Enter email">
-            <button type="submit" align="center" class="btn btn-primary">Send</button>
-          </form>
+              <input type="hidden" id="dest_email" name="email" class="form-control" placeholder="Enter email">
+              <button type="submit" align="center" class="btn btn-primary">Send</button>
+            </form>
+          </div>
         </div>
-      </div>
-      <div class="tab-pane fade" align="center" id="panel2" role="tabpanel">
-        <div class="tab-inside" style="display: block;max-height: 400px;max-width: 100%;overflow-y: auto;-ms-overflow-style: -ms-autohiding-scrollbar;">
-          <table class="table table-sm">
-            <thead style="background-color: #4fb3bf;">
-              <tr>
-                <th>Timestamp</th>
-                <th>Beneficiary</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <% @transcations.each do |transcation| %>
-              <% if transcation[:in_out] == "in" %>
-                <tr style="background-color: #A5D6A7">
-              <% else %>
-                <tr class="table-danger">
+        <div class="tab-pane fade" align="center" id="panel2" role="tabpanel">
+          <div class="tab-inside" style="display: block;max-height: 400px;max-width: 100%;overflow-y: auto;-ms-overflow-style: -ms-autohiding-scrollbar;">
+            <table class="table table-sm">
+              <thead style="background-color: #4fb3bf;">
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Beneficiary</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <% @transcations.each do |transcation| %>
+                <% if transcation[:in_out] == "in" %>
+                  <tr style="background-color: #A5D6A7">
+                <% else %>
+                  <tr class="table-danger">
+                <% end %>
+                  <td><%=transcation[:time_stamp]%></td>
+                  <td><%=transcation[:beneficiary]%></td>
+                  <td><%=transcation[:amount]%></td>
+                </tr>
               <% end %>
-                <td><%=transcation[:time_stamp]%></td>
-                <td><%=transcation[:beneficiary]%></td>
-                <td><%=transcation[:amount]%></td>
-              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="tab-pane fade" align="center" id="panel3" role="tabpanel">
+          <div class="tab-inside" align="center">
+            <% if current_user.reffered_promo_code.nil? %>
+            Been reffered by a friend? Enter their refferal code and get<br> 25 Eurekoins!!
+            <form action="/refferal" method="post">
+              <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+              <input name="refferal_code" class="form-control" placeholder="AVSKXXXX">
+              <button type="submit" class="btn btn-primary">Use Refferal Code</button>
+            </form>
             <% end %>
-          </table>
-        </div>
-      </div>
-      <div class="tab-pane fade" align="center" id="panel3" role="tabpanel">
-        <div class="tab-inside" align="center">
-          <% if current_user.reffered_promo_code.nil? %>
-          Been reffered by a friend? Enter their refferal code and get<br> 25 Eurekoins!!
-          <form action="/refferal" method="post">
-            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-            <input name="refferal_code" class="form-control" placeholder="AVSKXXXX">
-            <button type="submit" class="btn btn-primary">Use Refferal Code</button>
-          </form>
-          <% end %>
-          <br>Share your own refferal code and get 25 coins on each successful refferal!!<br><br>
-          <div style="border-radius: 10px;border: dashed 2px black;width:250px;height:100px;">
-            <h2 style="line-height: 100px;text-align: center;height:100px;"><%= current_user.promo_code %></h2>
+            <br>Share your own refferal code and get 25 coins on each successful refferal!!<br><br>
+            <div style="border-radius: 10px;border: dashed 2px black;width:250px;height:100px;">
+              <h2 style="line-height: 100px;text-align: center;height:100px;"><%= current_user.promo_code %></h2>
+            </div>
+            <div id="shareBtn" class="btn btn-success clearfix">
+              Share your Refferal Code
+            </div>
           </div>
-          <div id="shareBtn" class="btn btn-success clearfix">
-            Share your Refferal Code
-          </div>
-        </div>
 
 
-      </div>
+        </div>
+    </div>
   </div>
 </div>
 
