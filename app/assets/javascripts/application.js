@@ -43,12 +43,13 @@ function render_user(user,index) {
             <label for="'+index+'">\
               <img src="'+user.image+'"> '+user.name+'\
             </label><input class="alternative" type="radio" id="'+index+'">\
-          </div>'
+          <br/></div>'
 }
 
 function valid_amount() {
   amt = $('#amount').val();
-  if (amt>0) {
+  user = $('#dest_email').val();
+  if (amt>0 &&  user!=null && user!='') {
     $('#transfer_buttton').prop('disabled', false);
     return
   }
@@ -56,7 +57,6 @@ function valid_amount() {
     $('#transfer_buttton').prop('disabled', true);
     return
   }
-  // if(amot)
 }
 
 
@@ -71,7 +71,7 @@ function search_user(){
           console.log(result);
 					if(result.status==='OK'){
             data = result.data;
-            $('#dest_info_display').html('<b>Search Results</b><br/>Selcet the user to transfer amount to<br/>');
+            $('#dest_info_display').html('<b>Search Results</b><br/>Select the user to transfer amount to<br/>');
               $.each(result.data,function(index,user){
                 $('#dest_info_display').append(render_user(user,index));
               });

@@ -58,7 +58,7 @@
               </div>
               <label for="dest_name">Search</label>
               <input id="dest_name" onkeyup="search_user()" class="form-control" placeholder="Enter Name"><br/>
-              <div id="dest_info_display"><b>Search Results</b><br/>
+              <div id="dest_info_display"><br/>
               </div>
 
               <input type="hidden" id="dest_email" name="email" class="form-control" placeholder="Enter email">
@@ -104,9 +104,15 @@
             <div style="border-radius: 10px;border: dashed 2px black;width:250px;height:100px;">
               <h2 style="line-height: 100px;text-align: center;height:100px;"><%= current_user.promo_code %></h2>
             </div>
-            <div id="shareBtn" class="btn btn-success clearfix">
-              Share your Referral Code
+            <div id="shareBtn" class="btn btn-info clearfix">
+              Share your Referral Code on Facebook
             </div>
+            <div id="whatsBtn" class="btn btn-success clearfix">
+              <a style="color:white;" href="whatsapp://send?text=Log in to http://eurekoin.avskr.in .Use my referral code *<%= current_user.promo_code %>* to earn extra 25 Eurekoin">
+                Share your Referral Code on Whatsapp
+              </a>
+            </div>
+
           </div>
 
 
@@ -123,7 +129,7 @@ document.getElementById('shareBtn').onclick = function() {
     display: 'popup',
     mobile_iframe: true,
     quote: 'Login and Earn with my Referral Code: '+ refferal_code,
-    href: 'http://eurekoin.herokuapp.com',
+    href: 'http://eurekoin.avskr.in',
   }, function(response){});
 }
 </script>

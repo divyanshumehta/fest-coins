@@ -1,6 +1,12 @@
 class TranscationController < ApplicationController
 
   def transfer
+    if params[:email].nil? || params[:email].blank?
+      flash[:danger] = "No valid destination user"
+      puts "ERR DEST USER1"
+      redirect_to root_path
+      return
+    end
     dest = User.where(email:params[:email]).first
     if dest.nil?
       flash[:danger] = "No valid destination user"

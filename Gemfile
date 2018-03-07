@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem "font-awesome-rails"
 gem 'rails_admin', '~> 1.3'
 group :development, :test do
   gem 'byebug', platform: :mri
