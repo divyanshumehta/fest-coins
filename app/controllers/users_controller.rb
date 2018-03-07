@@ -4,12 +4,12 @@ class UsersController < ApplicationController
   def refferal
     reffered_user = User.where(promo_code: params[:refferal_code]).first
     if reffered_user == current_user
-      flash[:danger] = "Sorry :( You cannot use our own refferal code"
+      flash[:danger] = "Sorry :( You cannot use our own referral code"
       redirect_to root_path
       return
     end
     unless current_user.reffered_promo_code.nil?
-      flash[:danger] = "Sorry :( You have already used a refferal code"
+      flash[:danger] = "Sorry :( You have already used a referral code"
       redirect_to root_path
       return
     end
@@ -21,10 +21,10 @@ class UsersController < ApplicationController
       current_user.save
       t=Transcation.create(amount:25, user_id:User.first.id, receiver:current_user.email)
       t=Transcation.create(amount:25, user_id:User.first.id, receiver:reffered_user.email)
-      flash[:notice] = "Sucessfully used refferal code"
+      flash[:notice] = "Sucessfully used referral code"
       redirect_to root_path
     else
-      flash[:danger] = "Oops that was not a valid refferal code"
+      flash[:danger] = "Oops that was not a valid referral code"
       redirect_to root_path
     end
   end

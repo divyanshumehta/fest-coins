@@ -46,10 +46,23 @@ function render_user(user,index) {
           </div>'
 }
 
+function valid_amount() {
+  amt = $('#amount').val();
+  if (amt>0) {
+    $('#transfer_buttton').prop('disabled', false);
+    return
+  }
+  else {
+    $('#transfer_buttton').prop('disabled', true);
+    return
+  }
+  // if(amot)
+}
 
 
 function search_user(){
   name = $('#dest_name').val();
+  $('#transfer_buttton').prop('disabled', true);
   $.ajax({
 				type: "GET",
 				url: "/search/user",
@@ -82,10 +95,14 @@ $(document).ready(function(){
     $('#image_grid'+this.id).css('display','block');
     $('#image_grid'+this.id).css("color","green");
     $('#dest_name').val(data[this.id].name);
+    $('#transfer_buttton').prop('disabled', false);
+    valid_amount();
   });
+
+  $('#transfer_buttton').prop('disabled', true);
 
   setTimeout(function() {
     $('#messages').fadeOut('slow');
-}, 3000);
+}, 5000);
 
 });

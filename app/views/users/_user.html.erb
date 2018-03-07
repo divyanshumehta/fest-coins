@@ -43,7 +43,7 @@
             <a class="nav-link" data-toggle="tab" href="#panel2" role="tab">History</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#panel3" role="tab">Refferal</a>
+            <a class="nav-link" data-toggle="tab" href="#panel3" role="tab">Referral</a>
         </li>
     </ul>
     <div class="tab-content card">
@@ -54,7 +54,7 @@
 
               <div id="amount_div">
                 <label for="amount" >Amount</label>
-                <input id="amount" name="amount" class="form-control" placeholder="0">
+                <input id="amount" onkeyup="valid_amount()" name="amount" class="form-control" placeholder="0">
               </div>
               <label for="dest_name">Search</label>
               <input id="dest_name" onkeyup="search_user()" class="form-control" placeholder="Enter Name"><br/>
@@ -62,7 +62,7 @@
               </div>
 
               <input type="hidden" id="dest_email" name="email" class="form-control" placeholder="Enter email">
-              <button type="submit" align="center" class="btn btn-primary">Send</button>
+              <button type="submit" id="transfer_buttton" align="center" class="btn btn-primary">Send</button>
             </form>
           </div>
         </div>
@@ -92,20 +92,20 @@
         </div>
         <div class="tab-pane fade" align="center" id="panel3" role="tabpanel">
           <div class="tab-inside" align="center">
-            <% if current_user.reffered_promo_code.nil? %>
-            Been reffered by a friend? Enter their refferal code and get<br> 25 Eurekoins!!
+            <% if current_user.reffered_promo_code.nil? || current_user.reffered_promo_code.blank? %>
+            Been referred by a friend? Enter their referral code and get<br> 25 Eurekoins!!
             <form action="/refferal" method="post">
               <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
               <input name="refferal_code" class="form-control" placeholder="AVSKXXXX">
-              <button type="submit" class="btn btn-primary">Use Refferal Code</button>
+              <button type="submit" class="btn btn-primary">Use Referral Code</button>
             </form>
             <% end %>
-            <br>Share your own refferal code and get 25 coins on each successful refferal!!<br><br>
+            <br>Share your own referral code and get 25 coins on each successful referral!!<br><br>
             <div style="border-radius: 10px;border: dashed 2px black;width:250px;height:100px;">
               <h2 style="line-height: 100px;text-align: center;height:100px;"><%= current_user.promo_code %></h2>
             </div>
             <div id="shareBtn" class="btn btn-success clearfix">
-              Share your Refferal Code
+              Share your Referral Code
             </div>
           </div>
 
@@ -122,7 +122,7 @@ document.getElementById('shareBtn').onclick = function() {
     method: 'share',
     display: 'popup',
     mobile_iframe: true,
-    quote: 'Login and Earn with my Refferal Code: '+ refferal_code,
+    quote: 'Login and Earn with my Referral Code: '+ refferal_code,
     href: 'http://eurekoin.herokuapp.com',
   }, function(response){});
 }
