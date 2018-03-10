@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305184246) do
+ActiveRecord::Schema.define(version: 20180310073929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "code"
+    t.integer  "amount"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "active"
+  end
 
   create_table "transcations", force: :cascade do |t|
     t.integer  "amount"
@@ -36,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180305184246) do
     t.integer  "coins"
     t.boolean  "admin"
     t.string   "image"
+    t.text     "coupons_used",        default: [], array: true
   end
 
   add_foreign_key "transcations", "users"

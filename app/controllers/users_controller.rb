@@ -3,6 +3,11 @@ class UsersController < ApplicationController
 
   def refferal
     reffered_user = User.where(promo_code: params[:refferal_code]).first
+    if params[:refferal_code].blank? || params[:refferal_code].nil?
+      flash[:danger] = "Oops that was not a valid referral code"
+      redirect_to root_path
+      return
+    end
     if reffered_user == current_user
       flash[:danger] = "Sorry :( You cannot use our own referral code"
       redirect_to root_path

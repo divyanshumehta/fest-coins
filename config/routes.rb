@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
   get '/search/user' => 'users#search'
   post '/refferal' => 'users#refferal'
+  post '/coupon' => 'transcation#coupon'
 end

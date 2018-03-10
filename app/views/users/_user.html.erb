@@ -97,9 +97,15 @@
             <form action="/refferal" method="post">
               <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
               <input name="refferal_code" class="form-control" placeholder="AVSKXXXX">
-              <button type="submit" class="btn btn-primary">Use Referral Code</button>
-            </form>
+              <button type="submit" class="btn btn-danger">Use Referral Code</button>
+            </form><br/>
             <% end %>
+            Enter a Promo Code to earn Eurekoins!!
+            <form action="/coupon" method="post">
+              <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+              <input name="coupon_code" class="form-control" placeholder="PROMO CODE">
+              <button type="submit" class="btn btn-primary">Use Promo Code</button>
+            </form>
             <br>Share your own referral code and get 25 coins on each successful referral!!<br><br>
             <div style="border-radius: 10px;border: dashed 2px black;width:250px;height:100px;">
               <h2 style="line-height: 100px;text-align: center;height:100px;"><%= current_user.promo_code %></h2>
