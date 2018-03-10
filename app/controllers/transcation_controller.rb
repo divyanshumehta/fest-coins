@@ -61,8 +61,15 @@ class TranscationController < ApplicationController
       return
     end
     puts coupon
+    if Time.now > coupon.end_time
+      flash[:danger] = "Opps soory :( Promo code expired"
+      coupon.active=false
+      coupon.save
+      redirect_to root_path
+      return
+    end
     if coupon.active==false
-      flash[:danger] = "Opps soory :( Coupon code expired"
+      flash[:danger] = "Opps soory :( Promo code expired"
       redirect_to root_path
       return
     end
